@@ -1,0 +1,68 @@
+<sdf version="1.6">
+
+
+<fog>
+<type>linear</type>
+<color>0.02 0.02 0.02 1</color>
+<density>0.002</density>
+<start>2</start>
+<end>25</end>
+</fog>
+
+
+<include>
+<uri>model://ground_plane</uri>
+</include>
+
+
+<light type="spot" name="head_lamp">
+<pose>0 0 2 0 0 0</pose>
+<diffuse>0.8 0.8 0.7 1</diffuse>
+<specular>0.1 0.1 0.1 1</specular>
+<attenuation>
+<range>20</range>
+<constant>0.3</constant>
+<linear>0.02</linear>
+<quadratic>0.02</quadratic>
+</attenuation>
+<direction>1 0 -0.5</direction>
+<spot>
+<inner_angle>0.6</inner_angle>
+<outer_angle>0.9</outer_angle>
+<falloff>0.6</falloff>
+</spot>
+<cast_shadows>true</cast_shadows>
+</light>
+
+
+<model name="tunnel_segment">
+<static>true</static>
+<pose>5 0 0 0 0 0</pose>
+<link name="tunnel">
+<collision name="col">
+<geometry><box><size>10 4 3</size></box></geometry>
+<pose>0 0 1.5 0 0 0</pose>
+</collision>
+<visual name="vis">
+<geometry><box><size>10 4 3</size></box></geometry>
+<material>
+<ambient>0.05 0.05 0.05 1</ambient>
+<diffuse>0.08 0.08 0.08 1</diffuse>
+<specular>0.02 0.02 0.02 1</specular>
+</material>
+<pose>0 0 1.5 0 0 0</pose>
+</visual>
+</link>
+</model>
+
+
+<plugin name="gas_field" filename="libgas_field_plugin.so">
+<origin> 8 0 1.0 </origin>
+<sigma> 2.0 </sigma>
+<Cmax> 100.0 </Cmax>
+<topic>/gas_concentration</topic>
+<noise_std> 1.0 </noise_std>
+<publish_rate> 20 </publish_rate>
+</plugin>
+</world>
+</sdf>

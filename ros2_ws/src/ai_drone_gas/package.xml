@@ -1,0 +1,12 @@
+<package format="3">
+<name>ai_drone_gas</name>
+<version>0.0.1</version>
+<description>Gas field plugin for Gazebo + ROS2</description>
+<maintainer email="sefa@example.com">Sefa</maintainer>
+<license>MIT</license>
+<buildtool_depend>ament_cmake</buildtool_depend>
+<depend>rclcpp</depend>
+<depend>std_msgs</depend>
+<depend>gazebo_dev</depend>
+<export><build_type>ament_cmake</build_type></export>
+</package>

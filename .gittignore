@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+
+
+# colcon
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+
+# VSCode
+.vscode/
+
+
+# Misc
+*.swp
+.DS_Store
