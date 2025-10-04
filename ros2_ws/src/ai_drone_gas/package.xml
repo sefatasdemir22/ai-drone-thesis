@@ -1,12 +1,21 @@
+<?xml version="1.0"?>
 <package format="3">
-<name>ai_drone_gas</name>
-<version>0.0.1</version>
-<description>Gas field plugin for Gazebo + ROS2</description>
-<maintainer email="sefa@example.com">Sefa</maintainer>
-<license>MIT</license>
-<buildtool_depend>ament_cmake</buildtool_depend>
-<depend>rclcpp</depend>
-<depend>std_msgs</depend>
-<depend>gazebo_dev</depend>
-<export><build_type>ament_cmake</build_type></export>
+  <name>ai_drone_gas</name>
+  <version>0.0.2</version>
+  <description>Gas sensing simulation nodes for the cave mission</description>
+
+  <maintainer email="sefa@example.com">Sefa</maintainer>
+  <license>MIT</license>
+
+  <!-- Build tool -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Çalışma zamanı bağımlılıkları (Python düğümü) -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

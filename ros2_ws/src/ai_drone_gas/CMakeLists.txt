@@ -1,27 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 project(ai_drone_gas)
 
-
+# Sadece Python scriptlerini kuracağız
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
-find_package(gazebo_dev REQUIRED)
 
-
-include_directories(include ${GAZEBO_INCLUDE_DIRS})
-link_directories(${GAZEBO_LIBRARY_DIRS})
-add_definitions(${GAZEBO_CXX_FLAGS})
-
-
-add_library(gas_field_plugin SHARED src/gas_field_plugin.cpp)
-ament_target_dependencies(gas_field_plugin rclcpp std_msgs)
-target_link_libraries(gas_field_plugin ${GAZEBO_LIBRARIES})
-
-
-install(TARGETS gas_field_plugin
-ARCHIVE DESTINATION lib
-LIBRARY DESTINATION lib
-RUNTIME DESTINATION bin)
-
+# scripts klasöründeki çalıştırılabilir dosyaları yükle
+install(PROGRAMS
+  scripts/sim_gas_sensor.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()

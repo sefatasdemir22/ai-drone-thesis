@@ -1,68 +1,189 @@
+<?xml version="1.0" ?>
 <sdf version="1.6">
+  <world name="tunnel_with_rooms">
+    <include><uri>model://sun</uri></include>
 
+    <physics type="ode" name="default">
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
 
-<fog>
-<type>linear</type>
-<color>0.02 0.02 0.02 1</color>
-<density>0.002</density>
-<start>2</start>
-<end>25</end>
-</fog>
+    <!-- Floor -->
+    <model name="floor">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="c">
+          <geometry><plane><normal>0 0 1</normal><size>120 120</size></plane></geometry>
+        </collision>
+        <visual name="v">
+          <geometry><plane><normal>0 0 1</normal><size>120 120</size></plane></geometry>
+        </visual>
+      </link>
+    </model>
 
+    <!-- ================== MAIN TUNNEL (length 24m, width 3m, height 2.5m) ================== -->
+    <!-- Corridor spans x from -10 to +14. Entrance open at x=-10, end closed at x=+14 -->
+    <!-- LEFT WALL split into segments to create doorways at x=-4 and x=+9 -->
+    <model name="left_wall_seg1"><static>true</static>
+      <pose>-7.5 -1.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>5 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>5 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="left_wall_seg2"><static>true</static>
+      <pose>2.5 -1.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>11 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>11 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="left_wall_seg3"><static>true</static>
+      <pose>12 -1.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
 
-<include>
-<uri>model://ground_plane</uri>
-</include>
+    <!-- RIGHT WALL split for doorway at x=+2 -->
+    <model name="right_wall_seg1"><static>true</static>
+      <pose>-4.5 1.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>11 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>11 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="right_wall_seg2"><static>true</static>
+      <pose>8.5 1.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>11 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>11 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
 
+    <!-- CEILING and BACK WALL of corridor -->
+    <model name="corridor_ceiling"><static>true</static>
+      <pose>2 0 2.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>24 3 0.3</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>24 3 0.3</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="corridor_backwall"><static>true</static>
+      <pose>14 0 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
 
-<light type="spot" name="head_lamp">
-<pose>0 0 2 0 0 0</pose>
-<diffuse>0.8 0.8 0.7 1</diffuse>
-<specular>0.1 0.1 0.1 1</specular>
-<attenuation>
-<range>20</range>
-<constant>0.3</constant>
-<linear>0.02</linear>
-<quadratic>0.02</quadratic>
-</attenuation>
-<direction>1 0 -0.5</direction>
-<spot>
-<inner_angle>0.6</inner_angle>
-<outer_angle>0.9</outer_angle>
-<falloff>0.6</falloff>
-</spot>
-<cast_shadows>true</cast_shadows>
-</light>
+    <!-- ================== SIDE ROOM L1 (left) door at x=-4 ================== -->
+    <!-- Room size ~4x4x2.5m; opening toward corridor (no near wall) -->
+    <model name="roomL1_back"><static>true</static>
+      <pose>-4 -5.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomL1_left"><static>true</static>
+      <pose>-6 -3.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 4 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 4 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomL1_right"><static>true</static>
+      <pose>-2 -3.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 4 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 4 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomL1_ceiling"><static>true</static>
+      <pose>-4 -3.65 2.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 4 0.3</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 4 0.3</size></box></geometry></visual>
+      </link>
+    </model>
 
+    <!-- ================== SIDE ROOM R1 (right) door at x=+2 ================== -->
+    <model name="roomR1_back"><static>true</static>
+      <pose>2 5.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomR1_left"><static>true</static>
+      <pose>0 3.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 4 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 4 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomR1_right"><static>true</static>
+      <pose>4 3.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 4 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 4 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomR1_ceiling"><static>true</static>
+      <pose>2 3.65 2.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 4 0.3</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 4 0.3</size></box></geometry></visual>
+      </link>
+    </model>
 
-<model name="tunnel_segment">
-<static>true</static>
-<pose>5 0 0 0 0 0</pose>
-<link name="tunnel">
-<collision name="col">
-<geometry><box><size>10 4 3</size></box></geometry>
-<pose>0 0 1.5 0 0 0</pose>
-</collision>
-<visual name="vis">
-<geometry><box><size>10 4 3</size></box></geometry>
-<material>
-<ambient>0.05 0.05 0.05 1</ambient>
-<diffuse>0.08 0.08 0.08 1</diffuse>
-<specular>0.02 0.02 0.02 1</specular>
-</material>
-<pose>0 0 1.5 0 0 0</pose>
-</visual>
-</link>
-</model>
+    <!-- ================== SIDE ROOM L2 (left) door at x=+9 ================== -->
+    <model name="roomL2_back"><static>true</static>
+      <pose>9 -5.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 0.3 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 0.3 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomL2_left"><static>true</static>
+      <pose>7 -3.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 4 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 4 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomL2_right"><static>true</static>
+      <pose>11 -3.65 1.25 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.3 4 2.5</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.3 4 2.5</size></box></geometry></visual>
+      </link>
+    </model>
+    <model name="roomL2_ceiling"><static>true</static>
+      <pose>9 -3.65 2.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>4 4 0.3</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>4 4 0.3</size></box></geometry></visual>
+      </link>
+    </model>
 
+    <!-- LIGHTING -->
+    <light type="point" name="lamp_corridor_front">
+      <pose>-6 0 2.2 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <attenuation><range>12</range><linear>0.25</linear></attenuation>
+    </light>
+    <light type="point" name="lamp_corridor_back">
+      <pose>8 0 2.2 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <attenuation><range>12</range><linear>0.25</linear></attenuation>
+    </light>
+    <light type="point" name="lamp_roomL1"><pose>-4 -3.2 2.2 0 0 0</pose><diffuse>0.8 0.8 0.8 1</diffuse></light>
+    <light type="point" name="lamp_roomR1"><pose>2 3.2 2.2 0 0 0</pose><diffuse>0.8 0.8 0.8 1</diffuse></light>
+    <light type="point" name="lamp_roomL2"><pose>9 -3.2 2.2 0 0 0</pose><diffuse>0.8 0.8 0.8 1</diffuse></light>
 
-<plugin name="gas_field" filename="libgas_field_plugin.so">
-<origin> 8 0 1.0 </origin>
-<sigma> 2.0 </sigma>
-<Cmax> 100.0 </Cmax>
-<topic>/gas_concentration</topic>
-<noise_std> 1.0 </noise_std>
-<publish_rate> 20 </publish_rate>
-</plugin>
-</world>
+  </world>
 </sdf>
