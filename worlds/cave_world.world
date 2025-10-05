@@ -5,7 +5,7 @@
 
     <!-- 🚁 Drone modelimizi ekledik -->
     <include>
-      <uri>model://ai_drone_camera</uri>
+      <uri>model://iris</uri>
       <pose>-9 0 0.3 0 0 0</pose>
     </include>
 
