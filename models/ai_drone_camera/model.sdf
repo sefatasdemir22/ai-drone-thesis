@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="ai_drone_camera">
+    <pose>0 0 0.3 0 0 0</pose>
+
+    <link name="base_link">
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.03</ixx><iyy>0.03</iyy><izz>0.03</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.05</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.05</length>
+          </cylinder>
+        </geometry>
+        <material><ambient>0.3 0.3 0.3 1</ambient></material>
+      </visual>
+
+      <!-- downward camera -->
+      <sensor name="camera" type="camera">
+        <update_rate>15</update_rate>
+        <camera>
+          <horizontal_fov>1.39626</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip><near>0.1</near><far>100</far></clip>
+        </camera>
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <topic>/camera/image_raw</topic>
+      </sensor>
+    </link>
+  </model>
+</sdf>
