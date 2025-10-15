@@ -1,0 +1,6 @@
+*.jinja linguist-detectable=false
+*.sdf.jinja linguist-detectable=false
+*.world linguist-detectable=true
+*.py linguist-language=Python
+*.cpp linguist-language=C++
+*.h linguist-language=C++
