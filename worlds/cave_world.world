@@ -3,7 +3,7 @@
   <world name="tunnel_with_rooms">
     <include><uri>model://sun</uri></include>
 
-    <!-- 🚁 Drone modelimizi ekledik -->
+    <!--  Drone modelimi ekledim -->
     <include>
       <uri>model://iris</uri>
       <pose>-9 0 0.3 0 0 0</pose>
