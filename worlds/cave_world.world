@@ -1,18 +1,33 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <world name="tunnel_with_rooms">
-    <include><uri>model://sun</uri></include>
 
-    <!--  Drone modelimi ekledim -->
-    <include>
-      <uri>model://iris</uri>
-      <pose>-9 0 0.3 0 0 0</pose>
-    </include>
+  <!-- 💨 Gas Field Plugin -->
+  <plugin name="gas_field_plugin" filename="libgas_field_plugin.so">
+    <gas_type>CO</gas_type>
+    <base_concentration>0.05</base_concentration>
+    <hotspot>
+      <position>2 0 0</position>
+      <radius>3.0</radius>
+      <peak_concentration>0.9</peak_concentration>
+    </hotspot>
+  </plugin>
 
-    <physics type="ode" name="default">
-      <max_step_size>0.001</max_step_size>
-      <real_time_update_rate>1000</real_time_update_rate>
-    </physics>
+  <include>
+    <uri>model://sun</uri>
+  </include>
+
+  <!-- 🚁 Drone modelimizi ekledik -->
+  <include>
+    <uri>model://iris</uri>
+    <pose>-20 0 1.0 0 0 0</pose>
+  </include>
+
+  <physics type="ode" name="default">
+    <max_step_size>0.001</max_step_size>
+    <real_time_update_rate>1000</real_time_update_rate>
+  </physics>
+
 
     <!-- Floor -->
     <model name="floor">
