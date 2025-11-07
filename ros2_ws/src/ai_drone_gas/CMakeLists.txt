@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 project(ai_drone_gas)
 
+# --- Paketler ---
 find_package(ament_cmake REQUIRED)
-find_package(gazebo REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(gazebo_dev REQUIRED)
 
 # --- Gazebo C++ Plugin ---
 add_library(gas_field_plugin SHARED
@@ -27,7 +28,7 @@ ament_target_dependencies(gas_field_plugin
   std_msgs
 )
 
-# --- Python Script Kurulumu ---
+# --- Python Node ---
 install(PROGRAMS
   scripts/sim_gas_sensor.py
   DESTINATION lib/${PROJECT_NAME}
